@@ -7,33 +7,36 @@ var LightTableFilter = (function(Arr) {
     function _onInputEvent(e) {
         _input = e.target;
         var val = _input.value.toLowerCase();
+        status = false;
 
         var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
         Arr.forEach.call(tables, function(table) {
             Arr.forEach.call(table.tBodies, function(tbody) {
                 Arr.forEach.call(tbody.rows, function(row){
-                    _filter(row, 2, val);
+                    _filter(row, val);
                 });
             });
         });
     }
 
-    function _filter(row, id, val, negative, split) {
+    function _filter(row, val, negative, split) {
         split = typeof split !== 'undefined' ? split : '';
 
-        var searchColumns = Array.from(row.querySelectorAll('td:nth-child(' + id + ')'));
+        var searchColumns = Array.from(row.querySelectorAll('td:not(:first-of-type)'));
         var text = '';
 
         Arr.forEach.call(searchColumns, function(searchColumn) {
-            text = $(searchColumn).find('.tablesaw-cell-content').text().toLowerCase();
+            text += $(searchColumn).find('.tablesaw-cell-content').text().toLowerCase();
         });
 
         if (typeof val === 'string'){
             if (negative){
                 row.style.display = text.indexOf(val) !== -1 ? 'none' : 'table-row';
+                return text.indexOf(val) !== -1
             }
             else{
                 row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+                return text.indexOf(val) !== -1
             }
         }
     }
@@ -225,6 +228,7 @@ $(function() {
         }
     }
 
+
     // Listen for scroll events
     window.addEventListener('scroll', function ( event ) {
 
@@ -238,39 +242,61 @@ $(function() {
 
     }, false);
 
-    $('.table-add').click(function (e) {
+
+    $('.actions-buttons').on('click', '.table-add', function(e) {
         e.preventDefault();
         var $clone = $table.find('tr.row-hidden').clone(true).removeClass('row-hidden');
+        $clone.addClass('is-moving');
         var $row = $(this).closest('tr');
         if ($row && $clone){
             $row.after($clone);
         }
+        setTimeout(function() {
+            $clone.removeClass('is-moving');
+        }, 200);
     });
 
-    $('.table-remove').click(function (e) {
+    $('.actions-buttons').on('click', '.table-remove', function(e) {
         e.preventDefault();
+        var $row = $(this).parents('tr');
 
         if ($('input[name="delete-confirm"]').not(":hidden").is(':checked')){
             if (confirm('Remove selected row?')) {
-                $(this).parents('tr').detach();
+
+                $row.addClass('is-moving');
+                setTimeout(function() {
+                    $row.detach();
+                }, 200);
             }
         }
         else{
-            $(this).parents('tr').detach();
+            $row.addClass('is-moving');
+            setTimeout(function() {
+                $row.detach();
+            }, 200);
         }
     });
 
-    $('.table-up').click(function (e) {
+    $('.actions-arrows').on('click', '.table-up', function(e) {
         e.preventDefault();
         var $row = $(this).parents('tr');
-        if ($row.index() === 1) return; // Don't go above the header
+        $row.addClass('is-moving');
         $row.prev().before($row.get(0));
+
+        setTimeout(function() {
+            $row.removeClass('is-moving');
+        }, 500);
     });
 
-    $('.table-down').click(function (e) {
+    $('.actions-arrows').on('click', '.table-down', function(e) {
         e.preventDefault();
         var $row = $(this).parents('tr');
+        $row.addClass('is-moving');
         $row.next().after($row.get(0));
+
+        setTimeout(function() {
+            $row.removeClass('is-moving');
+        }, 500);
     });
 
     // A few jQuery helpers for exporting only
