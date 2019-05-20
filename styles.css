@@ -474,6 +474,7 @@ fieldset{
 }
 
 .filter-list > .multiselect,
+.filter-list > div,
 .filter-list > select{
     float: left;
     width: 33%;
