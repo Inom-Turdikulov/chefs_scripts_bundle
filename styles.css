@@ -480,23 +480,24 @@ fieldset{
     width: 33%;
 }
 
-.filter-list > .multiselect:not(:first-child){
+.filter-list > div:not(:first-child){
     margin-left: .5%;
 }
 
-.multiselect {
+
+.filter-list > div {
     width: 100%;
     position: relative;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
-.multiselect label{
+.filter-list > div label{
     font-weight: normal;
 }
 
 @media (max-width:47.9375em) {
-    .multiselect .form-select,
-    .multiselect {
+    .filter-list > div .form-select,
+    .filter-list > div {
         font-size: .7rem;
     }
 }
