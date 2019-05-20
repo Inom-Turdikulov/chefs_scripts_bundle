@@ -1,1 +1,2266 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Table Editor by Inomoz</title>
+</head>
+<body>
+
+<link rel="stylesheet" href="styles.css?v=0.0.1">
+<div class="table-with-filters">
+    <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"
+         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <symbol id="icon-plus" viewBox="0 0 22 28">
+                <title>plus</title>
+                <path d="M22 11.5v3c0 0.828-0.672 1.5-1.5 1.5h-6.5v6.5c0 0.828-0.672 1.5-1.5 1.5h-3c-0.828 0-1.5-0.672-1.5-1.5v-6.5h-6.5c-0.828 0-1.5-0.672-1.5-1.5v-3c0-0.828 0.672-1.5 1.5-1.5h6.5v-6.5c0-0.828 0.672-1.5 1.5-1.5h3c0.828 0 1.5 0.672 1.5 1.5v6.5h6.5c0.828 0 1.5 0.672 1.5 1.5z"></path>
+            </symbol>
+            <symbol id="icon-close" viewBox="0 0 22 28">
+                <title>close</title>
+                <path d="M20.281 20.656c0 0.391-0.156 0.781-0.438 1.062l-2.125 2.125c-0.281 0.281-0.672 0.438-1.062 0.438s-0.781-0.156-1.062-0.438l-4.594-4.594-4.594 4.594c-0.281 0.281-0.672 0.438-1.062 0.438s-0.781-0.156-1.062-0.438l-2.125-2.125c-0.281-0.281-0.438-0.672-0.438-1.062s0.156-0.781 0.438-1.062l4.594-4.594-4.594-4.594c-0.281-0.281-0.438-0.672-0.438-1.062s0.156-0.781 0.438-1.062l2.125-2.125c0.281-0.281 0.672-0.438 1.062-0.438s0.781 0.156 1.062 0.438l4.594 4.594 4.594-4.594c0.281-0.281 0.672-0.438 1.062-0.438s0.781 0.156 1.062 0.438l2.125 2.125c0.281 0.281 0.438 0.672 0.438 1.062s-0.156 0.781-0.438 1.062l-4.594 4.594 4.594 4.594c0.281 0.281 0.438 0.672 0.438 1.062z"></path>
+            </symbol>
+            <symbol id="icon-arrow-left" viewBox="0 0 25 28">
+                <title>arrow-left</title>
+                <path d="M24 14v2c0 1.062-0.703 2-1.828 2h-11l4.578 4.594c0.375 0.359 0.594 0.875 0.594 1.406s-0.219 1.047-0.594 1.406l-1.172 1.188c-0.359 0.359-0.875 0.578-1.406 0.578s-1.047-0.219-1.422-0.578l-10.172-10.187c-0.359-0.359-0.578-0.875-0.578-1.406s0.219-1.047 0.578-1.422l10.172-10.156c0.375-0.375 0.891-0.594 1.422-0.594s1.031 0.219 1.406 0.594l1.172 1.156c0.375 0.375 0.594 0.891 0.594 1.422s-0.219 1.047-0.594 1.422l-4.578 4.578h11c1.125 0 1.828 0.938 1.828 2z"></path>
+            </symbol>
+            <symbol id="icon-arrow-right" viewBox="0 0 23 28">
+                <title>arrow-right</title>
+                <path d="M23 15c0 0.531-0.203 1.047-0.578 1.422l-10.172 10.172c-0.375 0.359-0.891 0.578-1.422 0.578s-1.031-0.219-1.406-0.578l-1.172-1.172c-0.375-0.375-0.594-0.891-0.594-1.422s0.219-1.047 0.594-1.422l4.578-4.578h-11c-1.125 0-1.828-0.938-1.828-2v-2c0-1.062 0.703-2 1.828-2h11l-4.578-4.594c-0.375-0.359-0.594-0.875-0.594-1.406s0.219-1.047 0.594-1.406l1.172-1.172c0.375-0.375 0.875-0.594 1.406-0.594s1.047 0.219 1.422 0.594l10.172 10.172c0.375 0.359 0.578 0.875 0.578 1.406z"></path>
+            </symbol>
+            <symbol id="icon-arrow-up" viewBox="0 0 26 28">
+                <title>arrow-up</title>
+                <path d="M25.172 15.172c0 0.531-0.219 1.031-0.578 1.406l-1.172 1.172c-0.375 0.375-0.891 0.594-1.422 0.594s-1.047-0.219-1.406-0.594l-4.594-4.578v11c0 1.125-0.938 1.828-2 1.828h-2c-1.062 0-2-0.703-2-1.828v-11l-4.594 4.578c-0.359 0.375-0.875 0.594-1.406 0.594s-1.047-0.219-1.406-0.594l-1.172-1.172c-0.375-0.375-0.594-0.875-0.594-1.406s0.219-1.047 0.594-1.422l10.172-10.172c0.359-0.375 0.875-0.578 1.406-0.578s1.047 0.203 1.422 0.578l10.172 10.172c0.359 0.375 0.578 0.891 0.578 1.422z"></path>
+            </symbol>
+            <symbol id="icon-arrow-down" viewBox="0 0 26 28">
+                <title>arrow-down</title>
+                <path d="M25.172 13c0 0.531-0.219 1.047-0.578 1.406l-10.172 10.187c-0.375 0.359-0.891 0.578-1.422 0.578s-1.047-0.219-1.406-0.578l-10.172-10.187c-0.375-0.359-0.594-0.875-0.594-1.406s0.219-1.047 0.594-1.422l1.156-1.172c0.375-0.359 0.891-0.578 1.422-0.578s1.047 0.219 1.406 0.578l4.594 4.594v-11c0-1.094 0.906-2 2-2h2c1.094 0 2 0.906 2 2v11l4.594-4.594c0.359-0.359 0.875-0.578 1.406-0.578s1.047 0.219 1.422 0.578l1.172 1.172c0.359 0.375 0.578 0.891 0.578 1.422z"></path>
+            </symbol>
+            <symbol id="icon-chevron-up" viewBox="0 0 28 28">
+                <title>chevron-up</title>
+                <path d="M26.297 20.797l-2.594 2.578c-0.391 0.391-1.016 0.391-1.406 0l-8.297-8.297-8.297 8.297c-0.391 0.391-1.016 0.391-1.406 0l-2.594-2.578c-0.391-0.391-0.391-1.031 0-1.422l11.594-11.578c0.391-0.391 1.016-0.391 1.406 0l11.594 11.578c0.391 0.391 0.391 1.031 0 1.422z"></path>
+            </symbol>
+            <symbol id="icon-chevron-down" viewBox="0 0 28 28">
+                <title>chevron-down</title>
+                <path d="M26.297 12.625l-11.594 11.578c-0.391 0.391-1.016 0.391-1.406 0l-11.594-11.578c-0.391-0.391-0.391-1.031 0-1.422l2.594-2.578c0.391-0.391 1.016-0.391 1.406 0l8.297 8.297 8.297-8.297c0.391-0.391 1.016-0.391 1.406 0l2.594 2.578c0.391 0.391 0.391 1.031 0 1.422z"></path>
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="table-client">
+        <label for="client">Client Name:</label> <input type="text" class="table-input" name="client" id="client" value="Undefined"><br>
+        <label for="client-date">Service Date:</label> <input type="text" class="table-input" name="client-date" id="client-date" value="" placeholder="(enter date)">
+    </div>
+
+    <h3>Search / Filter menu</h3>
+    <div class="js-table">
+    <form action="" class="search-form">
+        <fieldset>
+            <label>
+                <input type="text" id="search" class="form-input search-input"  data-table="tablesaw" placeholder="Search by meal names">
+            </label>
+        </fieldset>
+        <fieldset class="filter-list">
+            <div class="multiselect" data-toggle="multiselect" data-row="2">
+                <div class="select-box">
+                    <div class="select-overlay"></div>
+                    <label>
+                        <select class="form-select">
+                            <option value="">Freezer</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="dietary-checkboxes is-hidden">
+                    <label class="form-checkbox">
+                        <input type="checkbox" value=""/>Empty
+                    </label>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="yes"/>Yes
+                    </label>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="no"/>No
+                    </label>
+                </div>
+            </div>
+            <div class="multiselect" data-toggle="multiselect" data-row="3">
+                <div class="select-box">
+                    <div class="select-overlay"></div>
+                    <label>
+                        <select class="form-select">
+                            <option value="">Dietary Concern</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="dietary-checkboxes is-hidden">
+                    <label class="form-checkbox">
+                        <input type="checkbox" value=""/>Empty
+                    </label>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="v"/>vegetarian
+                    </label>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="ls"/>lowsodium
+                    </label>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="d"/>diabeticfriendly
+                    </label>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="lc"/>lowcarb
+                    </label>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="lh"/>lowcholesterol
+                    </label>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="gf"/>glutenfree
+                    </label>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="df"/>dairyfree
+                    </label>
+                </div>
+            </div>
+            <div class="multiselect" data-toggle="multiselect" data-row="4">
+                <div class="select-box">
+                    <div class="select-overlay"></div>
+                    <label>
+                        <select class="form-select">
+                            <option value=""># of Servings</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="dietary-checkboxes is-hidden">
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="2"/>2
+                    </label>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="3"/>3
+                    </label>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" value="4"/>4
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <p class="table-heading js-table" id="legend">
+        <strong>V</strong> = vegetarian <strong>LS</strong> = lowsodium <strong>D</strong> = diabeticfriendly <strong>LC</strong> = lowcarb <strong>LH</strong> = lowcholesterol <strong>GF</strong> = glutenfree <strong>DF</strong> = dairyfree
+    </p>
+
+<!-- Don't change indentation of table-container elements (its important for pdf rendering!) -->
+<div class="table-container">
+    <div  class="table-editable">
+        <table id="tableEditable" class="table-editable tablesaw tablesaw-stack" data-tablesaw-mode="stack"  data-pdf-name="editableTable.pdf">
+            <thead>
+                <tr>
+                    <th width="120">
+                        Actions
+                        <small>confirm del. <input type="checkbox" name="delete-confirm" checked></small>
+                    </th>
+                    <th>Name</th>
+                    <th>Freezer</th>
+                    <th>Dietary</th>
+                    <th>Servings</th>
+                    <th width="20%">Produce</th>
+                    <th>Meat</th>
+                    <th>Frozen/Dairy</th>
+                    <th>Dry Goods</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Veggie Grain Bowl</strong><br>
+<strong>Cilantro Lime Sauce</strong></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">V/LS/D/<br>
+LH/GF</td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true">- 1 sweet potato, cubed<br>
+- 8 oz brussel sprouts<br>
+- 1 bell pepper, diced large<br>
+- ½ onion<br>
+- 2 lime, juiced<br>
+- 1 tbsp fresh cilantro</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- ½ cup plain Greek yogurt</td>
+                <td contenteditable="true">- 2 cups cooked brown rice</td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Salmon Cakes</strong><br>
+<em>Roasted Red Potatoes</em>
+<em>Green Beans</em></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">D/DF/LC</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- ½ small onion, diced fine<br>
+- 1 lemon<br>
+- 1 tbsp fresh dill (or 1 tsp dried)<br>
+- 8 oz red potatoes<br>
+- 8 oz green beans <br></td>
+                <td contenteditable="true">- 10 oz fresh salmon, chopped fine</td>
+                <td contenteditable="true">- 1 large egg</td>
+                <td contenteditable="true">- ¾ cup panko<br>
+- 1 tsp Dijon mustard</td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Spaghetti & Meatballs</strong></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- ½ tsp garlic<br>
+- ½ small onion</td>
+                <td contenteditable="true">- 12 oz ground beef</td>
+                <td contenteditable="true">- 1 egg<br>
+- 1/4 cup Parmesan<br>
+- 1 tbsp milk or cream <br></td>
+
+                <td contenteditable="true">- 6 oz spaghetti<br>
+- 16 oz San Marzano tomatoes<br>
+- 1 tsp sugar<br>
+- 2 tbsp pesto<br></td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Mediterranean Chicken & <br>
+Veggie Quinoa</strong></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">LS/D/LC/<br>
+GF/DF</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- ½ cup cherry tomatoes<br>
+- 2 tbsp red onion<br>
+- fresh basil<br>
+- 1 lemon<br>
+- ¼ cup parsley</td>
+
+                <td contenteditable="true">- 12 oz chicken breasts</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 1 small box quinoa<br>
+- ½ tsp cumin<br>
+- ½ tsp paprika</td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Pineapple Shrimp Stir Fry</strong><br>
+<em>Brown Rice</em></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">DF</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 3 green onions<br>
+- ½ red bell pepper<br>
+- 4 oz snow peas<br>
+- 1 tbsp fresh ginger</td>
+
+                <td contenteditable="true">- 8 oz 31-40 ct. shrimp</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 1 small can pineapple (or fresh)<br>
+- 1-2 tablespoons low sodium soy sauce<br>
+- 2 cups cooked brown rice</td>
+
+
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Butternut Squash <br>
+Mac n’ Cheese</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">V/LH</td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 1 cup milk<br>
+- 10 oz butternut squash<br>
+- 6 oz shredded cheese<br>
+- 2 tbsp Parmesan</td>
+                <td contenteditable="true">- 8 oz macaroni<br>
+- 1 tsp Dijon mustard<br>
+- 2 tbsp unseasoned breadcrumbs</td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>BBQ Chicken Thighs</strong> <br><em>Roasted
+Sweet Potatoes Broccoli</em></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">DF</td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true">- 2 small sweet potatoes, diced<br>
+- 8 oz broccoli</td>
+                <td contenteditable="true">- 16 oz boneless chicken thighs</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- BBQ sauce, to cover
+chicken before baking</td>
+            </tr>
+
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Salisbury Steak</strong><br>
+<em>Mashed Potatoes Carrots</em></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- ½ small onion, diced<br>
+- 8 oz carrots<br>
+- 2 russet potatoes</td>
+                <td contenteditable="true">- 12 oz ground beef</td>
+                <td contenteditable="true"> - ¼ cup milk<br>
+- ¼ cup sour cream</td>
+                <td contenteditable="true">- ½ cup breadcrumbs<br>
+- 1 tbsp ketchup<br>
+- 1 tsp Worcestershire<br>
+- 1 tsp Dijon<br>
+- 1 tsp cornstarch, to thicken<br>
+- ½ cup beef stock</td>
+            </tr>
+
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Cream of Mushroom
+Soup</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">V/GF/LC<br>
+LH/D</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- 4 oz diced carrots<br>
+- 1 small onion, diced<br>
+- 1 tsp garlic, minced<br>
+- 8 oz button mushrooms, sliced</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 1 ½ cups of whole milk or half & half</td>
+                <td contenteditable="true">- 3 cups chicken stock <br>
+- ½ tsp dried thyme</td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Breakfast Burritos</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">LS</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- 2 roma tomato, diced<br>
+- 1 red bell pepper, diced</td>
+                <td contenteditable="true">- 3 slices bacon, diced</td>
+                <td contenteditable="true">- 9 eggs <br>
+- shredded cheese</td>
+                <td contenteditable="true">- 4 whole wheat tortillas (or 8 small tortillas)</td>
+            </tr>
+
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Turkey Sweet Potato <br>
+Shepherd’s Pie</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">D/LH</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- ½ small onion<br>
+- 1 tbsp fresh rosemary<br>
+- 2 sweet potatoes</td>
+                <td contenteditable="true">- 12 oz ground turkey </td>
+                <td contenteditable="true">- ¼ cup milk<br>
+- 10 oz frozen mixed veg</td>
+                <td contenteditable="true">- ½ cup chicken stock</td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Curry Chicken Salad</strong></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">DF/LC/LS <br>
+D/LH/GF</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- 1 apple<br>
+- 1 celery stalk (optional)<br>
+- 4 oz mixed greens (or sandwich buns)</td>
+                <td contenteditable="true">- 24 oz chicken</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- ¼ cup cashews<br>
+- ¼ cup raisins<br>
+- ½ cup light mayo<br>
+- 1 tbsp curry powder</td>
+            </tr>
+            <!-- This is our clonable table line -->
+            <tr class="row-hidden">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span></li>
+                        <li class="actions-arrows">
+                            <span class="table-up"><svg class="icon icon-arrow-up"><use xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]" checked></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true">Untitled</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Pork Fried Rice</strong></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">DF/D</td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true">- 4 oz mushrooms<br>
+- 1 carrot, shredded<br>
+- 4 oz broccoli<br>
+- green onions<br>
+- ½ red bell pepper
+                </td>
+                <td contenteditable="true">- 8 oz pork tenderloin (or bacon)</td>
+                <td contenteditable="true">- 1 egg</td>
+                <td contenteditable="true">- 2 cups cooked rice<br>
+- 1 tbsp sesame oil<br>
+- ¼ cup soy sauce
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Balsamic salmon</strong><br>
+<em>Spinach</em><br>
+<em>Yellow squash</em>
+                </td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">LS/D/LC/GF/DF</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- garlic<br>
+- 8 oz spinach<br>
+- 1 yellow squash
+                </td>
+                <td contenteditable="true">- 2 (6 oz) salmon fillets</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- ¼ cup balsamic<br>
+- 2 tsp Dijon mustard<br>
+- 1 tsp oregano
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Classic meatloaf</strong><br>
+<em>Mashed potatoes</em><br>
+<em>Green beans</em>
+                </td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true">- ½ onion, shredded<br>
+- garlic<br>
+- 1 lb potatoes<br>
+- 8 oz green beans
+                </td>
+                <td contenteditable="true">- 16 oz ground beef (or 12 oz ground beef & 4 oz ground pork)</td>
+                <td contenteditable="true">- ½ cup milk<br>
+- ¼ cup plain greek yogurt or sour cream (4 potatoes)
+                </td>
+                <td contenteditable="true">- ¼ cup ketchup<br>
+- ½ cup breadcrumbs<br>
+- ½ tsp thyme<br>
+-1 tsp Worcestershire<br>
+- 1 tsp Dijon mustard
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Pork tenderloin with fennel & artichoke</strong><br>
+<em>Cous cous</em>
+                </td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">LS/D/DF</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 1 fennel bulb, sliced ½ inch<br>
+- 6 oz cherry tomato<br>
+- fresh parsley<br>
+- lemon, for zesting
+                </td>
+                <td contenteditable="true">- 12 oz pork tenderloin</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- ¼ cup Kalamata olives<br>
+- 1 tsp dried rosemary (or fresh)<br>
+- 1 small box cous cous
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+                <td contenteditable="true"><strong>Smoked salmon & leek quiche</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- 1 leek, tops removed<br>
+- fresh dill
+                </td>
+                <td contenteditable="true">- 4 oz smoked salmon</td>
+                <td contenteditable="true">- 8 eggs<br>
+- 3/4 cup milk or cream<br>
+- 1 pie crust<br>
+- ¼ cup Parmesan
+                </td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Tuscan white bean soup</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">V/D/LC/LH/GF</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- ½ onion<br>
+- 2 tsp garlic<br>
+- 1 large carrot<br>
+- 1 stalk celery
+                </td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- grated parmesan cheese (optional)<br>
+- ½ package frozen spinach
+                </td>
+                <td contenteditable="true">- ½ tsp dried thyme<br>
+- 3 cups chicken stock<br>
+- 8 oz diced tomato<br>
+- 15 oz white beans
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Chicken Dijonnaise</strong><br>
+<em>Mashed Potatoes</em><br>
+<em>Sautéed Carrots</em>
+                </td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 8 oz carrots<br>
+- 2 small russet potatoes<br>
+- 2 green onions<br>
+- Fresh thyme
+                </td>
+                <td contenteditable="true">- 12 oz boneless chicken thighs or thin-cut breasts</td>
+                <td contenteditable="true">- 1/3 cup heavy cream or half n’ half</td>
+                <td contenteditable="true">- 2 tbsp flour<br>
+- 2 tbsp Dijon mustard<br>
+- 3 tbsp white wine or chicken stock
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Southwest Quinoa Salad</strong></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">V/DF/GF/D/LH</td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true">- ½ red bell pepper, diced<br>
+- 2 green onions<br>
+- ¼ cup cilantro (optional)<br>
+- 2 limes, juiced
+                </td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 14 oz black beans, rinsed<br>
+- 14 oz canned corn<br>
+- 1 small box quinoa, cooked<br>
+- 1/3 cup olive oil<br>
+- 1 tsp cumin
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Greek turkey meatballs with Tzatziki Sauce</strong><br>
+<em>Roasted Sweet Potatoes</em>
+                </td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">LS/D/LC</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 1 large sweet potato<br>
+- 2 tbsp red onion<br>
+- garlic<br>
+- 2 tbsp lemon juice<br>
+- ¼ cup grated cucumber
+                </td>
+                <td contenteditable="true">- 8 oz ground turkey</td>
+                <td contenteditable="true">- ½ cup frozen spinach (can also use fresh)<br>
+- ½ cup plain yogurt<br>
+- 1 egg
+                </td>
+                <td contenteditable="true">- 1 tsp oregano<br>
+- ½ tsp dill (or use fresh)<br>
+- ¼ cup breadcrumbs
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Chicken pot pie</strong><br>
+<em>Note: make roux for thickening sauce</em>
+                </td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">LS/LH</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- 2 carrots, ¼ in slice<br>
+- 2 stalks celery<br>
+- ½ small onion
+                </td>
+                <td contenteditable="true">- 16 oz chicken</td>
+                <td contenteditable="true">-1 piecrust<br>
+- ½ cup frozen peas<br>
+- 1/3 cup half n’ half
+                </td>
+                <td contenteditable="true">- 1 tsp dried thyme<br>
+- 1 tsp chicken base<br>
+- ¼ cup water, 3 tbsp flour
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Mediterranean Shrimp Sauté</strong><br>
+<em>Rice Pilaf</em>
+                </td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">LS/D</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 1 red bell pepper<br>
+- 1 shallot<br>
+- 1 tsp garlic<br>
+- 1 roma tomato, diced<br>
+- ½ lemon, juiced<br>
+- fresh parsley
+                </td>
+                <td contenteditable="true">- 6-8 large shrimp (~10 oz)</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- Rice pilaf box<br>
+- 1 tsp smoked paprika<br>
+- 1 tbsp flour (to coat shrimp)<br>
+- 1/3 cup chicken stock<br>
+- 2 tbsp white wine (optional)
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Pepper steak</strong></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">D/DF</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 1 bell pepper<br>
+- ½ small onion<br>
+- 1 roma tomato, chopped
+                </td>
+                <td contenteditable="true">- 12 oz beef tenderloin, cut into strips</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 1 cup beef broth<br>
+- ¼ cup soy sauce<br>
+- ½ tsp brown sugar<br>
+- 2 cups cooked rice
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Chicken Almandine</strong><br>
+<em>Roasted Potatoes</em><br>
+<em>Green Beans</em>
+                </td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">LS/D/<br>
+LH
+                </td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 12 oz red potatoes<br>
+- 8 oz green beans<br>
+- 1 tbsp fresh rosemary
+                </td>
+                <td contenteditable="true">- 12 oz thin cut chicken breasts</td>
+                <td contenteditable="true">- 1 tbsp butter</td>
+                <td contenteditable="true">- flour/butter roux (to thicken)<br>
+- ¼ cup sliced almonds<br>
+- ½ cup chicken stock
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Tuscan Shrimp Pasta</strong></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">LS</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- garlic<br>
+- fresh parsley<br>
+- 8 oz spinach
+                </td>
+                <td contenteditable="true">- 8 oz shrimp, peeled and deveined</td>
+                <td contenteditable="true">- ¼ cup Parmesan<br>
+- ½ cup half n’ half
+                </td>
+                <td contenteditable="true">- 1 cup crushed tomatoes<br>
+- 6 oz penne pasta
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Beef Stroganoff</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 1 small onion<br>
+- 4 oz mushrooms
+                </td>
+                <td contenteditable="true">- 10 oz beef tenderloin, cut in strips</td>
+                <td contenteditable="true">- ½ cup light sour cream</td>
+                <td contenteditable="true">- 6 oz egg noodles<br>
+- 1 tsp Worcestershire<br>
+- 2 tbsp tomato paste<br>
+- 1 tsp flour (for coating steak)<br>
+- ¼ cup beef stock<br>
+- ½ tsp dried thyme
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Ginger Pork Sweet Potato Stir Fry</strong></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">DF/LH/D</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 1 sm sweet potato, diced<br>
+- 3 green onions<br>
+- garlic<br>
+- 1 tbsp ginger
+                </td>
+                <td contenteditable="true">- 8 oz pork tenderloin</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 1 cup brown rice<br>
+- 1 tbsp soy sauce<br>
+- dash of sesame oil<br>
+- cornstarch(to thicken if needed)
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Citrus Glazed Salmon</strong><br>
+<em>Quinoa</em><br>
+<em>Green Beans</em>
+                </td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">D/DF/LC</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 8 oz green beans<br>
+- juice of 1 orange<br>
+- garlic
+                </td>
+                <td contenteditable="true">- 2 (6 oz) salmon fillets</td>
+                <td contenteditable="true">- 1 tbsp butter</td>
+                <td contenteditable="true">- Quinoa box<br>
+- 1 tbsp soy sauce<br>
+- 1 tbsp rice wine vinegar<br>
+- 1 tbsp brown sugar
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Garden Vegetable Soup</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">V/D/LC/LH<br>
+GF/DF
+                </td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- 1 leek<br>
+- garlic<br>
+- 2 large carrots<br>
+- 1 russet potato<br>
+- 4 oz green beans<br>
+- 1 lemon, juiced
+                </td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 28 oz diced tomatoes<br>
+                - 4 cups chicken or veg stock<br>
+                - 1 small can of corn kernels<br>
+                - 1 tsp Italian seasoning
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Veggie Enchilada Casserole</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">V/LH</td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true">- 1 zucchini<br>
+- 3-4 green onions<br>
+- Cilantro (optional)
+                </td>
+                <td contenteditable="true">
+                <td contenteditable="true">- 1 cup shredded cheese<br>
+- 1 cup corn kernels
+                </td>
+                <td contenteditable="true">- 6 flour or corn tortillas<br>
+- 16 oz enchilada sauce<br>
+- 15 oz black beans, drained<br>
+- 4 oz green chiles (optional)
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Spinach Mushrooms Quiche</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">LS/V</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- fresh parsley<br>
+- 10 oz spinach<br>
+- ½ small onion<br>
+- 8 oz mushrooms
+                </td>
+                <td contenteditable="true">
+                <td contenteditable="true">- 8 eggs<br>
+- ¾ cup half n’ half<br>
+- 8 oz swiss cheese<br>
+- pie crust
+                </td>
+                <td contenteditable="true">
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Cajun Red Beans & Rice</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">DF/GF/LH/<br>
+D
+                </td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 1 small onion, diced<br>
+- 1 stalk celery (optional)<br>
+- ½ bell pepper<br>
+- 2 cloves garlic
+                </td>
+                <td contenteditable="true">- 1 sausage link (Andouille, Italian, etc.)</td>
+                <td contenteditable="true">
+                <td contenteditable="true">- 15 oz red beans<br>
+- ¼ cup water or chicken stock<br>
+- 15 oz low sodium diced tomatoes<br>
+- 1 tsp Cajun seasoning<br>
+- ½ tsp Oregano<br>
+- 1 cup cooked rice
+                </td>
+
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Waldorf Chicken Salad</strong></td>
+                <td contenteditable="true">NO</td>
+                <td contenteditable="true">DF</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- ½ cup grapes<br>
+- 1 apple<br>
+- 1 celery stalk
+                </td>
+                <td contenteditable="true">- 24 oz chicken breasts</td>
+                <td contenteditable="true">
+                <td contenteditable="true">- ¼ cup walnuts<br>
+- ¼ cup light mayo<br>
+- ¼ cup honey mustard<br>
+- 4 rolls
+                </td>
+
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Stuffed Peppers</strong></td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">LS/LC/GF/<br>
+D
+                </td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 2 bell peppers, cut in half<br>
+- 1 small onion<br>
+- 2 roma tomatoes
+                </td>
+                <td contenteditable="true">- 8 oz ground beef</td>
+                <td contenteditable="true">- ½ cup shredded cheese</td>
+                <td contenteditable="true">- 1 cup long grain & wild rice<br>
+- ½ tsp Italian seasoning
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Italian Chicken Meatballs</strong><br>
+<em>Sautéed Zucchini with Spinach</em>
+                </td>
+                <td contenteditable="true">YES</td>
+                <td contenteditable="true">LC/D/LS</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 2 zucchini<br>
+- 1 clove garlic<br>
+- 6 oz spinach
+                </td>
+                <td contenteditable="true">- 8 oz ground chicken</td>
+                <td contenteditable="true">- ¼ cup Parmesan<br>
+- 1 egg
+                </td>
+                <td contenteditable="true">- ¼ cup breadcrumbs<br>
+- 1 tsp oregano
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Chicken & Dumplings</strong></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">LH</td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true">- 1 small onion<br>
+- 2 carrots, peeled<br>
+- 1 celery rib
+                </td>
+                <td contenteditable="true">- 16 oz chicken breasts or thighs</td>
+                <td contenteditable="true">- 1/3 cup milk (for dumplings)</td>
+                <td contenteditable="true">- 1 tsp chicken base<br>
+- water to cover<br>
+- 1 tsp poultry seasoning<br>
+- 1 cup flour<br>
+- 2 tsp baking powder
+                </td>
+
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Pistachio Crusted Salmon</strong><br>
+<em>Balsamic Roasted Brussel Sprouts</em>
+                </td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">LS/D/LC/<br>
+DF
+                </td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- ½ lemon, juiced<br>
+- 8 oz brussel sprouts
+                </td>
+                <td contenteditable="true">- 12 oz salmon</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- ¼ cup pistachios (bulk)<br>
+- 2 tbsp panko breadcrumbs<br>
+- 1 tbsp honey or sugar<br>
+- 1 tbsp whole grain mustard<br>
+- 1 tbsp balsamic vinegar
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Mexican Meatloaf</strong><br>
+<em>Mashed Sweet Potato</em><br>
+<em>Broccoli</em>
+                </td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">LC</td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true">- 8 oz broccoli<br>
+- 2 sweet potatoes<br>
+- ½ tsp garlic<br>
+- ½ small onion, grated
+                </td>
+                <td contenteditable="true">- 12 oz ground beef</td>
+                <td contenteditable="true">- 1 egg<br>
+- 1 cup shredded cheese
+                </td>
+                <td contenteditable="true">- ¼ cup breadcrumbs<br>
+- 1 tsp cumin<br>
+- 1 tsp chili powder<br>
+- 8 oz picante (taco) sauce
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Pork Tenderloin with Cranberry Sauce</strong><br>
+<em>Wild Rice</em><br>
+<em>Green Beans</em>
+                </td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">LS/GF/DF</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 1 shallot<br>
+- 1 tsp garlic<br>
+- 8 oz green beans
+                </td>
+                <td contenteditable="true">- 16 oz pork tenderloin</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- ½ cup dried cranberries<br>
+- ½ cup red wine<br>
+- cornstarch (to thicken sauce)<br>
+- 2 cups cooked wild rice mix
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Thai Coconut Shrimp</strong></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">D/DF</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 3 green onions<br>
+- 1 tsp ginger<br>
+- 1 tsp garlic<br>
+- 1 lime, juiced<br>
+- Assorted veg (pepper, pea pods, etc.)<br>
+- Fresh basil
+                </td>
+                <td contenteditable="true">- 6 oz raw shrimp, peeled and deveined</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 14 oz coconut milk<br>
+- 1 tsp brown sugar or honey<br>
+- 1 tbsp soy sauce<br>
+- Brown rice
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Stuffed Shells</strong></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">V/LH</td>
+                <td contenteditable="true">4</td>
+
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 10 oz frozen spinach<br>
+- 8 oz ricotta<br>
+- 8 oz mozzarella<br>
+- ¼ cup Parmesan
+                </td>
+                <td contenteditable="true">- 1 tsp Italian seasoning<br>
+- 8 large manicotti shells<br>
+- 16 oz good marinara sauce
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Crab Cakes</strong><br>
+<em>Rice pilaf</em><br>
+<em>Green Beans</em>
+                </td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 1 lemon, zest & juice<br>
+- 4 oz green beans
+                </td>
+                <td contenteditable="true">- 6 oz refrigerated crab meat</td>
+                <td contenteditable="true">- 1 egg</td>
+                <td contenteditable="true">- 1 tbsp mayo<br>
+- ½ cup breadcrumbs or crackers<br>
+- 1 tsp dijon<br>
+- Rice pilaf
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>BBQ Meatballs</strong><br>
+<em>Roasted Potatoes</em><br>
+<em>Carrots</em>
+                </td>
+
+                <td contenteditable="true"></td>
+                <td contenteditable="true">LC</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- ½ small onion, grated<br>
+- 1 tsp garlic<br>
+- 12 oz red potatoes<br>
+- 8 oz carrots
+                </td>
+                <td contenteditable="true">- 12 oz ground beef</td>
+                <td contenteditable="true">- 1 egg<br>
+- ¼ cup milk or half n’ half
+                </td>
+                <td contenteditable="true">- ¼ cup breadcrumbs<br>
+- ¼ cup BBQ sauce<br>
+- 1 tsp Italian seasoning
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Butternut Squash Quiche</strong></td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">LS</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- ½ small onion, diced<br>
+- 6 oz butternut squash (can also buy frozen)
+                </td>
+                <td contenteditable="true">- 2 slices bacon</td>
+                <td contenteditable="true">- 4 oz shredded cheese<br>
+- 8 eggs<br>
+- 1 piecrust<br>
+- ½ cup milk
+                </td>
+                <td contenteditable="true">- 1 tsp dried thyme</td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Potato Corn Chowder</strong></td>
+
+                <td contenteditable="true"></td>
+                <td contenteditable="true">LS/GF/LH</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- 1 small onion<br>
+- 1 rib celery<br>
+- 1 lb potatoes
+                </td>
+                <td contenteditable="true">- 2 slices bacon (optional)</td>
+                <td contenteditable="true">- 1 cup frozen corn<br>
+- 1 cup half n’ half<br>
+- 2 oz shredded cheese
+                </td>
+                <td contenteditable="true">- 1 tsp dried thyme<br>
+- 1 ½ cups chicken stock<br>
+- 1 tsp Worcestershire sauce
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Mandarin Orange Chicken Salad</strong><br>
+<em>Mixed Greens or Rolls</em>
+                </td>
+
+                <td contenteditable="true"></td>
+                <td contenteditable="true">DF/LC/GF/<br>
+                    LS/D
+                </td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true">- 1 tsp lemon juice<br>
+- 1 rib celery<br>
+- 8 oz mixed greens (optional)
+                </td>
+                <td contenteditable="true">- 24 oz chicken breast</td>
+
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 1 small can mandarin orange<br>
+- ¼ cup mayonnaise<br>
+- 1 tsp tarragon (or 1 tbsp fresh)<br>
+- 2 oz almonds<br>
+- 3 rolls (optional)
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Sweet & Sour Chicken</strong></td>
+
+                <td contenteditable="true"></td>
+                <td contenteditable="true">DF</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 1 tsp ginger<br>
+- 1 tsp garlic<br>
+- 1 small onion<br>
+- ½ red bell pepper
+                </td>
+                <td contenteditable="true">- 12 oz chicken breasts</td>
+
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 1 small can pineapple (or fresh)<br>
+- 2 cups cooked brown rice<br>
+- ¼ cup soy sauce<br>
+- 1 tbsp honey or brown sugar
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Swedish Meatballs</strong><br>
+<em>Mashed Potatoes</em><br>
+<em>Sautéed Carrots</em>
+                </td>
+                <td contenteditable="true">Yes</td>
+
+                <td contenteditable="true"></td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 8 oz carrots<br>
+- 2 russet potatoes<br>
+- ¼ cup onion, shredded<br>
+- ½ tsp garlic
+                </td>
+                <td contenteditable="true">- 8 oz ground beef</td>
+                <td contenteditable="true">- 1 egg<br>
+- ½ cup half n’ half
+                </td>
+                <td contenteditable="true">- 1 tbsp Worcestershire sauce<br>
+- 1 tsp beef base<br>
+- 1 tsp Dijon mustard<br>
+- ¼ tsp allspice<br>
+- ¼ cup breadcrumbs
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Chicken Parmesan Meatballs</strong><br>
+<em>Sautéed Zucchini, Spinach, & Cherry Tomato</em>
+                </td>
+                <td contenteditable="true">Yes</td>
+                <td contenteditable="true">LC</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 6 oz spinach<br>
+- 4 oz cherry tomato<br>
+- 2 zucchini<br>
+- 1 tsp garlic<br>
+- 1 tbsp fresh parsley
+                </td>
+                <td contenteditable="true">- 12 oz ground chicken (or turkey)</td>
+                <td contenteditable="true">- 1 egg<br>
+- ¼ cup Parmesan<br>
+- 1-2 cups Mozzarella (enough to cover meatballs)
+                </td>
+                <td contenteditable="true">- ½ tsp Italian seasoning<br>
+- ½ cup breadcrumbs<br>
+- 14 oz Marinara sauce (or San Marzano tomatoes)
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Apple Sage Pork Tenderloin</strong><br>
+<em>Roasted Sweet Potatoes</em>
+                </td>
+                <td contenteditable="true">Yes</td>
+                <td contenteditable="true">LS/D/LC/<br>
+GF/DF
+                </td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 2 sweet potatoes<br>
+- 1 apple (granny smith)<br>
+- ½ small onion
+                </td>
+                <td contenteditable="true">- 16 oz pork tenderloin</td>
+
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- ½ tsp dried sage (or 2 tsp fresh)<br>
+- ½ cup chicken stock<br>
+- 1 tbsp whole-grain mustard
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Salmon with Cucumber-Dill Sauce</strong><br>
+<em>Sautéed Yellow Squash & Spinach</em>
+                </td>
+                <td contenteditable="true">No</td>
+                <td contenteditable="true">LS/LC/DF/<br>
+                    GF
+                </td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 2 small yellow squash<br>
+- 1 tbsp lemon juice<br>
+- ½ small cucumber<br>
+- 8oz spinach
+                </td>
+                <td contenteditable="true">- 2 (6 oz) salmon fillets</td>
+                <td contenteditable="true">- ¾ cup plain yogurt</td>
+                <td contenteditable="true">- 1 tsp dried dill (or 1 tbsp fresh)</td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Turkey Meatloaf</strong><br>
+<em>Mashed Potatoes</em><br>
+<em>Broccoli</em>
+                </td>
+                <td contenteditable="true">Yes</td>
+                <td contenteditable="true">D</td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true">- 2 russet potatoes<br>
+- 8 oz broccoli<br>
+- ½ small onion
+                </td>
+                <td contenteditable="true">- 1 lb ground turkey</td>
+                <td contenteditable="true">- 1 egg</td>
+                <td contenteditable="true">- 1 tsp dried thyme<br>
+- ¼ cup panko breadcrumbs<br>
+- ¼ cup ketchup
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Apple French Toast Baked Casserole</strong><br>
+<em>(Sauté apples first)</em>
+                </td>
+                <td contenteditable="true">Yes</td>
+                <td contenteditable="true">V</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- 2 apples, cubed</td>
+
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 3 eggs<br>
+- 1 cup milk or half n’ half
+                </td>
+                <td contenteditable="true">- 8 oz French bread or rolls<br>
+- 1 tsp vanilla<br>
+- 2 tbsp brown or white sugar<br>
+- 1 tsp cinnamon
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Mahi Mahi with Basil Butter</strong><br>
+<em>Quinoa</em><br>
+<em>Green beans</em>
+                </td>
+                <td contenteditable="true">No</td>
+                <td contenteditable="true">LC/D/LS/<br>
+GF
+                </td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- ½ lemon, juiced<br>
+- 1 tbsp chopped basil<br>
+- 8 oz green beans<br>
+- 1 clove garlic
+                </td>
+                <td contenteditable="true">- 2 6oz mahi mahi fillets (or use haddock, cod, or halibut)</td>
+                <td contenteditable="true">- 3 tbsp butter</td>
+                <td contenteditable="true">- 1 small box quinoa</td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Lemon Chicken</strong><br>
+<em>Rice pilaf</em><br>
+<em>Sautéed Zucchini</em>
+                </td>
+                <td contenteditable="true">No</td>
+                <td contenteditable="true">LS/D/LC/<br>
+DF
+                </td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 2 small zucchini<br>
+- 1 lemon, zest & juice<br>
+- fresh parsley<br>
+- 1 tsp garlic
+                </td>
+                <td contenteditable="true">- 12 oz chicken breasts</td>
+
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- ¼ flour (for dredging chicken)<br>
+- ¼ cup chicken stock<br>
+- 1 box rice pilaf
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Clam Chowder</strong></td>
+                <td contenteditable="true">Yes</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- 1 small onion<br>
+- 1 russet potato, cubed
+                </td>
+                <td contenteditable="true">- 2 oz bacon or ham (optional)</td>
+                <td contenteditable="true">- 3 cups milk</td>
+                <td contenteditable="true">- 20 oz canned clams, use juice<br>
+- 1 tsp dried thyme<br>
+- 2 bay leaves (optional)
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Beef & Broccoli Stir Fry</strong><br>
+<em>(can also purchase a pre-prepared stir fry sauce)</em>
+                </td>
+                <td contenteditable="true">No</td>
+                <td contenteditable="true">DF</td>
+                <td contenteditable="true">2</td>
+                <td contenteditable="true">- 1 tsp garlic<br>
+- ½ onion<br>
+- 1 cup broccoli<br>
+- 1 tsp ginger, grated
+                </td>
+                <td contenteditable="true">- 8oz beef tenderloin</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 2 cups cooked brown rice<br>
+- 1 tbsp brown sugar<br>
+- ½ cup water<br>
+- 3 tbsp cornstarch (2 tbsp for coating beef)
+                </td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Veggie Frittata</strong></td>
+                <td contenteditable="true">Yes</td>
+                <td contenteditable="true">V/GF/LS</td>
+                <td contenteditable="true">4</td>
+                <td contenteditable="true">- 5 small red potatoes<br>
+- 1 green onion<br>
+- 2 oz spinach<br>
+- 1 roma tomato<br>
+- 1 tbsp fresh basil
+                </td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- 2 tbsp butter<br>
+- 8 eggs<br>
+- ½ cup Asiago or Parmesan cheese
+                </td>
+                <td contenteditable="true"></td>
+            </tr>
+            <tr class="is-disabled">
+                <td>
+                    <ul class="actions-buttons">
+                        <li><span class="table-remove"><svg class="icon icon-close"><use
+                                xlink:href="#icon-close"></use></svg></span></li>
+                        <li><span class="table-add"><svg class="icon icon-plus"><use xlink:href="#icon-plus"></use></svg></span>
+                        </li>
+                        <li class="actions-arrows">
+                <span class="table-up"><svg class="icon icon-arrow-up"><use
+                        xlink:href="#icon-arrow-up"></use></svg></span>
+                            <span class="table-down"><svg class="icon icon-arrow-down"><use
+                                    xlink:href="#icon-arrow-down"></use></svg></span>
+                        </li>
+                        <li class="actions-select"><label><input type="checkbox" name="row-select[]"></label></li>
+                    </ul>
+                </td>
+
+                <td contenteditable="true"><strong>Pesto Chicken & Potato
+Salad</strong></td>
+                <td contenteditable="true">No</td>
+                <td contenteditable="true">D/DF</td>
+                <td contenteditable="true">3</td>
+                <td contenteditable="true">- 1 lb red potatoes<br>
+- 1 lemon, juiced
+                </td>
+                <td contenteditable="true">- 16 oz chicken (can buy pre-cooked rotisserie)</td>
+                <td contenteditable="true"></td>
+                <td contenteditable="true">- ½ cup mayo<br>
+- 2 tbsp pesto<br>
+- 1 small bag pine nuts
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button class="table-button fav is-hidden" data-toggle="data-export">Generate Menu</button>
+    <button class="table-button default" data-toggle="data-export">Generate Menu</button>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+    if(typeof jQuery == 'undefined'){
+        document.write('<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></'+'script>');
+    }
+</script>
+
+<script src="vendor.js?v=0.0.2"></script>
+<script src="scripts_bundle.js?v=0.0.2"></script>
+
+</body>
+</html>
+
 
