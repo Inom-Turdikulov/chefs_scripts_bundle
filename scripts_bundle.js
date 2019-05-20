@@ -416,17 +416,23 @@ $(function() {
     // Search stuff
     $( '[data-toggle="multiselect"] .select-overlay' ).click(function(e){
         var checkboxes = $(this).parent().next();
-        $('.dietary-checkboxes').addClass('is-hidden');
+        var currentIndex = $(this).closest('[data-toggle="multiselect"]').index();
 
         if (checkboxes.hasClass('is-hidden')) {
             checkboxes.removeClass('is-hidden');
         } else {
             checkboxes.addClass('is-hidden');
         }
+
+        $.each($('.dietary-checkboxes'), function (i, e) {
+            if (currentIndex !== i){
+                $(e).addClass('is-hidden');
+            }
+        })
     });
 
     $('body').on('click', function(e) {
-        if($(e.target).closest('.multiselect').length == 0) {
+        if($(e.target).closest('[data-toggle="multiselect"]').length == 0) {
             $('.dietary-checkboxes').addClass('is-hidden');
         }
     });
