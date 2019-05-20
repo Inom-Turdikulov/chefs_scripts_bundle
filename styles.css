@@ -478,17 +478,12 @@ fieldset{
 .filter-list > select{
     float: left;
     width: 33%;
+    position: relative;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
 .filter-list > div:not(:first-child){
     margin-left: .5%;
-}
-
-
-.filter-list > div {
-    width: 100%;
-    position: relative;
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
 .filter-list > div label{
