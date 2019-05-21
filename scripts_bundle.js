@@ -281,7 +281,7 @@ $(function() {
         e.preventDefault();
         var $row = $(this).parents('tr');
         $row.addClass('is-moving');
-        $row.prev().before($row.get(0));
+        $row.prevAll().not(".is-hidden").first().before($row.get(0));
 
         setTimeout(function() {
             $row.removeClass('is-moving');
@@ -292,7 +292,7 @@ $(function() {
         e.preventDefault();
         var $row = $(this).parents('tr');
         $row.addClass('is-moving');
-        $row.next().after($row.get(0));
+        $row.nextAll().not(".is-hidden").first().after($row.get(0));
 
         setTimeout(function() {
             $row.removeClass('is-moving');
