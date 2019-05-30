@@ -333,7 +333,7 @@ $(function() {
             return
         }
 
-        var $rows = $table.find('tr:not(.is-disabled)');
+        var $rows = $table.find('tr:not(.is-disabled):not(.js-service-row)');
         var headers = [];
         var body = [];
         var doc = new jsPDF('l');
