@@ -187,24 +187,6 @@ $(function() {
         });
     });
 
-    var selectedCheckboxes = 0;
-
-    $("input[name=\"row-select[]\"]").change(function () {
-        if (!$(this).is(':checked')){
-            $(this).closest('tr').addClass('is-disabled');
-            selectedCheckboxes -= 1;
-        }
-        else{
-            $(this).closest('tr').removeClass('is-disabled');
-            selectedCheckboxes += 1;
-        }
-
-        if (selectedCheckboxes >= 4){
-            scollButtons();
-        }
-    });
-
-
     // Floating button
     var favInitilized = false;
 
@@ -214,8 +196,42 @@ $(function() {
     var $button = $('.table-button.fav');
     var $buttonDefault = $('.table-button.default');
 
-    function scollButtons(){
-        if (selectedCheckboxes >= 4 || favInitilized){
+    // Listen for scroll events
+    window.addEventListener('scroll', function ( event ) {
+
+        // Clear our timeout throughout the scroll
+        window.clearTimeout( isScrolling );
+
+        // Set a timeout to run after scrolling ends
+        isScrolling = setTimeout(function() {
+            scrollButtons();
+        }, 50);
+
+    }, false);
+
+    // Show/hide generate button on varous steps
+    $('#tableEditable').on('click', 'input[name=\"row-select[]\"]', function(){
+        scrollButtonsEvent();
+    });
+
+    function scrollButtonsEvent(){
+        var selectedCheckboxes = 0;
+
+        $("input[name=\"row-select[]\"]").each(function () {
+            if ($(this).is(':checked')){
+                $(this).closest('tr').removeClass('is-disabled');
+                selectedCheckboxes += 1;
+            }
+            else{
+                $(this).closest('tr').addClass('is-disabled');
+            }
+        });
+
+        scrollButtons(selectedCheckboxes);
+    }
+
+    function scrollButtons(selectedCheckboxes){
+        if (selectedCheckboxes >= 5 || favInitilized){
             favInitilized = true;
 
             var anchorIsVisble = false;
@@ -235,20 +251,6 @@ $(function() {
         }
     }
 
-    // Listen for scroll events
-    window.addEventListener('scroll', function ( event ) {
-
-        // Clear our timeout throughout the scroll
-        window.clearTimeout( isScrolling );
-
-        // Set a timeout to run after scrolling ends
-        isScrolling = setTimeout(function() {
-            scollButtons();
-        }, 50);
-
-    }, false);
-
-
     $('.actions-buttons').on('click', '.table-add', function(e) {
         e.preventDefault();
 
@@ -262,6 +264,8 @@ $(function() {
         setTimeout(function() {
             $clone.removeClass('is-moving');
         }, 200);
+
+        scrollButtonsEvent();
     });
 
     $('.actions-buttons').on('click', '.table-remove', function(e) {
@@ -284,6 +288,8 @@ $(function() {
                 $row.detach();
             }, 200);
         }
+
+        scrollButtonsEvent();
     });
 
     // Arrows logic
@@ -413,6 +419,7 @@ $(function() {
             columnStyles: {
                 0: {
                     cellWidth: 75,
+                    fontStyle: 'bold',
                 },
                 1: {
                     cellWidth: 40,
@@ -454,9 +461,9 @@ $(function() {
             },
             margin: {top: 18, bottom: 18, left: 40, right: 25},
             willDrawCell: function(data) {
-                if (data.row.section === 'body' && data.column.dataKey == 0){
-                    doc.setFontStyle('bold');
-                }
+                // if (data.row.section === 'body' && data.column.dataKey == 0){
+                //     doc.setFontStyle('bold');
+                // }
             },
             didParseCell: function (table) {
                 if (table.section === 'head') {
