@@ -177,10 +177,10 @@ $(function() {
     });
 
     $('#tableEditable').on('click', 'input[name="delete-confirm"]', function(){
-        var checkBoxes = $("input[name=\"delete-confirm\"]");
+        var checkBoxes = $('input[name="delete-confirm"]');
         var currentChecbox = $(this);
 
-        $('input[name="delete-confirm"]').each(function(i, e){
+        checkBoxes.each(function(i, e){
             if (!$(e).is(currentChecbox)){
                 $(this).prop("checked", currentChecbox.prop("checked"));
             }
@@ -216,7 +216,8 @@ $(function() {
 
     function scollButtons(){
         if (selectedCheckboxes >= 4 || favInitilized){
-            favInitilized = true
+            favInitilized = true;
+
             var anchorIsVisble = false;
 
             if($(window).scrollTop() + $(window).height() > $(document).height() - $button.height()) {
@@ -234,7 +235,6 @@ $(function() {
         }
     }
 
-
     // Listen for scroll events
     window.addEventListener('scroll', function ( event ) {
 
@@ -251,8 +251,10 @@ $(function() {
 
     $('.actions-buttons').on('click', '.table-add', function(e) {
         e.preventDefault();
+
         var $clone = $table.find('tr.row-hidden').clone(true).removeClass('row-hidden').removeClass('js-service-row');
         $clone.addClass('is-moving');
+
         var $row = $(this).closest('tr');
         if ($row && $clone){
             $row.after($clone);
@@ -277,13 +279,17 @@ $(function() {
         }
         else{
             $row.addClass('is-moving');
+
             setTimeout(function() {
                 $row.detach();
             }, 200);
         }
     });
 
-    $('.actions-arrows').on('click', '.table-up', function(e) {
+    // Arrows logic
+    var $actionArrows = $('.actions-arrows');
+
+    $actionArrows.on('click', '.table-up', function(e) {
         e.preventDefault();
         var $row = $(this).parents('tr');
         $row.addClass('is-moving');
@@ -294,7 +300,7 @@ $(function() {
         }, 500);
     });
 
-    $('.actions-arrows').on('click', '.table-down', function(e) {
+    $actionArrows.on('click', '.table-down', function(e) {
         e.preventDefault();
         var $row = $(this).parents('tr');
         $row.addClass('is-moving');
@@ -305,8 +311,10 @@ $(function() {
         }, 500);
     });
 
+    // Generate PDF
     $btn.click(function (e) {
         e.preventDefault();
+
         var pdfName = $('#tableEditable').data('pdfName');
         var clientName = $('input[name="client"]').val();
         var clientDate = $('#client-date').val();
@@ -461,14 +469,14 @@ $(function() {
         doc.save(pdfName);
     });
 
-    $( '[data-toggle="multiselect"] select' ).on('mousedown', function(e) {
+    $('[data-toggle="multiselect"] select').on('mousedown', function(e) {
         e.preventDefault();
         this.blur();
         window.focus();
     });
 
     // Search stuff
-    $( '[data-toggle="multiselect"] .select-overlay' ).click(function(e){
+    $('[data-toggle="multiselect"] .select-overlay').click(function(e){
         var checkboxes = $(this).parent().next();
         var currentIndex = $(this).closest('[data-toggle="multiselect"]').index();
 
